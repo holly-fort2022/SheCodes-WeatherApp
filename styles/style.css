@@ -1,0 +1,68 @@
+body {
+  font-family: "Sono", sans-serif;
+}
+h1 {
+  color: #984ee8;
+  line-height: 1.5;
+  font-size: 34px;
+  text-transform: capitalize;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  color: #a175cf;
+  opacity: 0.7;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+h6 {
+  opacity: 0.7;
+}
+
+ul {
+  list-style-type: none;
+  color: #441ac1;
+  font-style: italic;
+  font-size: 14px;
+  padding: 0px;
+}
+a {
+  text-decoration: none;
+}
+
+.weather-app {
+  margin: 20px auto;
+  border: 1px solid #441ac1;
+  padding: 30px;
+  max-width: 600px;
+  border-radius: 30px;
+  background: linear-gradient(
+    360deg,
+    rgb(175, 218, 241) 0%,
+    rgb(183, 163, 242) 100%
+  );
+}
+
+.week-days {
+  color: #e80699;
+  font-weight: bolder;
+}
+
+.weather-icon {
+  color: rgb(7, 115, 115);
+  padding: 10px 25px;
+}
+
+.temperature {
+  font-weight: bold;
+}
+
+.lower-temp {
+  opacity: 0.7;
+  font-weight: normal;
+}
+
+#sky-condition {
+  text-transform: capitalize;
+}
