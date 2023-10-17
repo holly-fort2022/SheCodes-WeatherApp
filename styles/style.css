@@ -67,10 +67,7 @@ a {
   text-transform: capitalize;
 }
 
-#creator-link {
+.creatorLink {
   font-size: 14px;
-}
-
-.container {
   text-align: center;
 }
