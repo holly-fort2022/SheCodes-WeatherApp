@@ -32,7 +32,7 @@ a {
 }
 
 .weather-app {
-  margin: 20px auto;
+  margin: 20px auto 0px;
   border: 1px solid #441ac1;
   padding: 30px;
   max-width: 600px;
@@ -65,4 +65,12 @@ a {
 
 #sky-condition {
   text-transform: capitalize;
+}
+
+#creator-link {
+  font-size: 14px;
+}
+
+.container {
+  text-align: center;
 }
