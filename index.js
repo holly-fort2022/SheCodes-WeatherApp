@@ -38,6 +38,9 @@ function displayWeatherCondition(response) {
   );
   document.querySelector("#sky-condition").innerHTML =
     response.data.weather[0].main;
+  document.querySelector("#feels-like").innerHTML = Math.round(
+    response.data.main.feels_like
+  );
 }
 
 function searchCity(city) {
