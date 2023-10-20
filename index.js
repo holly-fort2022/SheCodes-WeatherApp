@@ -27,69 +27,35 @@ function liveDate(date) {
 let currentDate = document.querySelector("#current-date");
 currentDate.innerHTML = liveDate(now);
 
-function updateCity(event) {
-  event.preventDefault();
-  let inputCity = document.querySelector("#input-city");
-  let currentCity = document.querySelector("#current-city");
+function displayWeatherCondition(response) {
+  document.querySelector("#current-city").innerHTML = response.data.name;
+  document.querySelector("#current-temperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  document.querySelector("#sky-condition").innerHTML =
+    response.data.weather[0].main;
+}
 
-  let city = inputCity.value.toLowerCase().trim();
-  currentCity.innerHTML = city;
+function searchCity(city) {
   let apiKey = "06e98a2911ef49c817729e9fe56cf740";
-  let units = "metric";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-
-  axios.get(apiUrl).then(displayWeather);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherCondition);
 }
 
-function displayWeather(response) {
-  let currentTemp = Math.round(response.data.main.temp);
-  let currentCondition = response.data.weather[0].description;
-  let currentHumidity = response.data.main.humidity;
-  let currentWind = Math.round(response.data.wind.speed);
-  let currentFeelsTemp = Math.round(response.data.main.feels_like);
-  let displayTemp = document.querySelector("#current-temperature");
-  let displayCondition = document.querySelector("#sky-condition");
-  let displayHumidity = document.querySelector("#humidity");
-  let displayWind = document.querySelector("#wind");
-  let displayFeelsTemp = document.querySelector("#feels-like");
-  displayTemp.innerHTML = currentTemp;
-  displayCondition.innerHTML = currentCondition;
-  displayHumidity.innerHTML = currentHumidity;
-  displayWind.innerHTML = currentWind;
-  displayFeelsTemp.innerHTML = currentFeelsTemp;
-}
-let userCity = document.querySelector("#user-city");
-userCity.addEventListener("submit", updateCity);
-
-function displayCurrentGeoWeather(response) {
-  let currentLocation = response.data.name;
-  let displayLocation = document.querySelector("#current-city");
-  displayLocation.innerHTML = currentLocation;
-  let currentTemp = Math.round(response.data.main.temp);
-  let currentCondition = response.data.weather[0].description;
-  let currentHumidity = response.data.main.humidity;
-  let currentWind = Math.round(response.data.wind.speed);
-  let currentFeelsTemp = Math.round(response.data.main.feels_like);
-  let displayTemp = document.querySelector("#current-temperature");
-  let displayCondition = document.querySelector("#sky-condition");
-  let displayHumidity = document.querySelector("#humidity");
-  let displayWind = document.querySelector("#wind");
-  let displayFeelsTemp = document.querySelector("#feels-like");
-  displayTemp.innerHTML = currentTemp;
-  displayCondition.innerHTML = currentCondition;
-  displayHumidity.innerHTML = currentHumidity;
-  displayWind.innerHTML = currentWind;
-  displayFeelsTemp.innerHTML = currentFeelsTemp;
+function handleSudmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#input-city").value;
+  searchCity(city);
 }
 
 function searchLocation(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
   let apiKey = "06e98a2911ef49c817729e9fe56cf740";
-  let units = "metric";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-
-  axios.get(apiUrl).then(displayCurrentGeoWeather);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeatherCondition);
 }
 
 function getCurrentLocation(event) {
@@ -97,5 +63,10 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
 
-let currentButton = document.querySelector("#current-button");
-currentButton.addEventListener("click", getCurrentLocation);
+let searchForm = document.querySelector("#user-city");
+searchForm.addEventListener("submit", handleSudmit);
+
+let currentLocationButton = document.querySelector("current-button");
+currentLocationButton.addEventListener("click", getCurrentLocation);
+
+searchCity("London");
