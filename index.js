@@ -66,7 +66,7 @@ function getCurrentLocation(event) {
 let searchForm = document.querySelector("#user-city");
 searchForm.addEventListener("submit", handleSudmit);
 
-let currentLocationButton = document.querySelector("current-button");
+let currentLocationButton = document.querySelector("#current-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("London");
